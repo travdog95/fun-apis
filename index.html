@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fun APIs</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;800&display=swap");
+    </style>
+    <link rel="stylesheet" href="/css/main.css" />
+    <script src="/js/main.js" defer></script>
+  </head>
+  <body>
+    <header class="header"><h2>Fun APIs</h2></header>
+    <div class="container">
+      <div class="movie-cards-container" data-movie-cards-container></div>
+    </div>
+
+    <template data-movie-card-template>
+      <div class="movie-card">
+        <img src="" class="image" alt="Poster" data-image />
+        <div class="meta-data">
+          <div class="title" data-title></div>
+          <div class="year" data-year></div>
+          <div class="type" data-type></div>
+        </div>
+      </div>
+    </template>
+  </body>
+</html>

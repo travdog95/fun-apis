@@ -1,0 +1,44 @@
+:root {
+  font-family: "Nunito Sans", sans-serif;
+  color: black;
+  font-size: 14px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.movie-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.movie-card {
+  border: 1px solid var(--light-gray);
+  box-shadow: 0 1px 2px var(--light-gray);
+  border-radius: 0.15rem;
+  display: flex;
+  flex-direction: row;
+  padding: 0.5rem;
+
+  img {
+    height: 13rem;
+  }
+
+  .meta-data {
+    padding-left: 0.5rem;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+  }
+}
+
+@import "variables";

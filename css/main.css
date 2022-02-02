@@ -1,0 +1,62 @@
+:root {
+  font-family: "Nunito Sans", sans-serif;
+  color: black;
+  font-size: 14px;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.movie-cards-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(25rem, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.movie-card {
+  border: 1px solid var(--light-gray);
+  -webkit-box-shadow: 0 1px 2px var(--light-gray);
+          box-shadow: 0 1px 2px var(--light-gray);
+  border-radius: 0.15rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 0.5rem;
+}
+
+.movie-card img {
+  height: 13rem;
+}
+
+.movie-card .meta-data {
+  padding-left: 0.5rem;
+}
+
+.movie-card .meta-data .title {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+:root {
+  --accent-color: rgb(204, 0, 0);
+  --lightest-gray: rgb(244, 244, 244);
+  --light-gray: rgb(144, 144, 144);
+  --medium-gray: rgb(96, 96, 96);
+  --dark-gray: rgb(13, 13, 13);
+  --header-height: 40px;
+  --animation-duration: 200ms;
+  --animation-timing-curve: ease-in-out;
+}
