@@ -1,10 +1,8 @@
-:root {
-  --accent-color: rgb(204, 0, 0);
-  --lightest-gray: rgb(244, 244, 244);
-  --light-gray: rgb(144, 144, 144);
-  --medium-gray: rgb(96, 96, 96);
-  --dark-gray: rgb(13, 13, 13);
-  --header-height: 40px;
-  --animation-duration: 200ms;
-  --animation-timing-curve: ease-in-out;
-}
+//Variables
+$lightest-gray: hsl(0, 0%, 96%);
+$modal-background: hsla(0, 0%, 76%, 0.7);
+$light-gray: hsl(0, 0%, 76%);
+$medium-gray: hsl(0, 0%, 46%);
+$dark-gray: hsl(0, 0%, 5%);
+$animation-duration: 200ms;
+$animation-timing-curve: ease-in-out;

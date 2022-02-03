@@ -12,18 +12,45 @@
     <script src="/js/main.js" defer></script>
   </head>
   <body>
-    <header class="header"><h2>Fun APIs</h2></header>
+    <header class="header"><h2>Movie Search</h2></header>
     <div class="container">
+      <input type="search" class="search-input" data-search-input />
+      <button class="search" data-search-button>Search</button>
+      <div class="message" data-message></div>
       <div class="movie-cards-container" data-movie-cards-container></div>
     </div>
-
+    <div class="modal-container hidden" data-modal-container>
+      <div class="move-details-container" data-movie-details-container></div>
+    </div>
     <template data-movie-card-template>
       <div class="movie-card">
-        <img src="" class="image" alt="Poster" data-image />
+        <img src="" alt="Poster" data-poster />
         <div class="meta-data">
           <div class="title" data-title></div>
           <div class="year" data-year></div>
           <div class="type" data-type></div>
+        </div>
+      </div>
+    </template>
+    <template data-movie-details-template>
+      <div class="movie-details-card">
+        <div class="header">
+          <div>
+            <div class="title" data-title></div>
+            <div class="meta-data-header-container">
+              <div class="year" data-year></div>
+              <div class="rating" data-rating></div>
+              <div class="runtime" data-runtime></div>
+              <div class="imdb-rating" data-imdb-rating></div>
+            </div>
+          </div>
+          <div class="close" data-modal-close-button>X</div>
+        </div>
+        <div class="main">
+          <img src="" alt="Poster" data-poster />
+          <div>
+            <div class="plot" data-plot></div>
+          </div>
         </div>
       </div>
     </template>

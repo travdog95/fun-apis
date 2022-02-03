@@ -1,0 +1,58 @@
+.modal-container {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: $modal-background;
+
+  .close {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+}
+
+.move-details-container {
+  width: 55rem;
+  background-color: white;
+}
+
+.movie-details-card {
+  padding: 1rem;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .title {
+      font-size: 2.5rem;
+      font-weight: 800;
+    }
+
+    .meta-data-header-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+
+      div {
+        margin-right: 1rem;
+      }
+    }
+  }
+
+  .main {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    img {
+      margin-right: 1rem;
+    }
+  }
+}
