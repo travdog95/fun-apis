@@ -20,6 +20,27 @@ header.header,
 .container {
   margin: 1rem;
 }
+
+.search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 1rem 0;
+
+  .search-input,
+  .search {
+    margin-right: 0.5rem;
+  }
+}
+
+.paging-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .movie-cards-container {
   display: grid;
   grid-template-columns: 1fr;
@@ -30,7 +51,7 @@ header.header,
   border-top: 0;
   display: flex;
   flex-direction: row;
-  padding: 0.5rem;
+  padding: 0.25rem;
 
   &:first-child {
     border-top: 1px solid $light-gray;
@@ -50,15 +71,20 @@ header.header,
   }
 
   img {
-    height: 5rem;
+    height: 4rem;
   }
 
   .meta-data {
     padding-left: 0.5rem;
 
     .title {
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 800;
+    }
+
+    .year,
+    .type {
+      font-size: 0.8rem;
     }
   }
 }

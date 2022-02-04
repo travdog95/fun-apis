@@ -14,43 +14,55 @@
   <body>
     <header class="header"><h2>Movie Search</h2></header>
     <div class="container">
-      <input type="search" class="search-input" data-search-input />
-      <button class="search" data-search-button>Search</button>
-      <div class="message" data-message></div>
+      <div class="search-container">
+        <input type="search" class="search-input" data-search-input />
+        <button class="search btn btn-primary" data-search-button>Search</button>
+        <div class="message" data-message></div>
+      </div>
+      <div class="pagination-container hidden" data-pagination-container>
+        <div class="results-meta-data">
+          Showing <span data-first-record></span> to <span data-last-record></span> of
+          <span data-total-results></span> entries
+        </div>
+        <div class="paging-buttons-container">
+          <button class="btn btn-paging" data-previous-page>Previous</button>
+          <div class="pages-buttons-container"></div>
+          <button class="btn btn-paging" data-next-page>Next</button>
+        </div>
+      </div>
       <div class="movie-cards-container" data-movie-cards-container></div>
     </div>
     <div class="modal-container hidden" data-modal-container>
-      <div class="move-details-container" data-movie-details-container></div>
+      <div class="move-details-container" data-movie-details-container>
+        <div class="movie-details-card">
+          <div class="header">
+            <div>
+              <div class="title" data-title></div>
+              <div class="meta-data-header-container">
+                <div class="year" data-year></div>
+                <div class="rating" data-rating></div>
+                <div class="runtime" data-runtime></div>
+                <div class="imdb-rating" data-imdb-rating></div>
+              </div>
+            </div>
+            <div class="close" data-modal-close-button>X</div>
+          </div>
+          <div class="main">
+            <img src="" alt="Poster" data-poster />
+            <div>
+              <div class="plot" data-plot></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <template data-movie-card-template>
       <div class="movie-card">
         <img src="" alt="Poster" data-poster />
         <div class="meta-data">
           <div class="title" data-title></div>
-          <div class="year" data-year></div>
           <div class="type" data-type></div>
-        </div>
-      </div>
-    </template>
-    <template data-movie-details-template>
-      <div class="movie-details-card">
-        <div class="header">
-          <div>
-            <div class="title" data-title></div>
-            <div class="meta-data-header-container">
-              <div class="year" data-year></div>
-              <div class="rating" data-rating></div>
-              <div class="runtime" data-runtime></div>
-              <div class="imdb-rating" data-imdb-rating></div>
-            </div>
-          </div>
-          <div class="close" data-modal-close-button>X</div>
-        </div>
-        <div class="main">
-          <img src="" alt="Poster" data-poster />
-          <div>
-            <div class="plot" data-plot></div>
-          </div>
+          <div class="year" data-year></div>
         </div>
       </div>
     </template>

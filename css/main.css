@@ -109,6 +109,44 @@ header.header,
   margin: 1rem;
 }
 
+.search-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin: 1rem 0;
+}
+
+.search-container .search-input,
+.search-container .search {
+  margin-right: 0.5rem;
+}
+
+.paging-buttons-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
 .movie-cards-container {
   display: -ms-grid;
   display: grid;
@@ -126,7 +164,7 @@ header.header,
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  padding: 0.5rem;
+  padding: 0.25rem;
 }
 
 .movie-card:first-child {
@@ -147,7 +185,7 @@ header.header,
 }
 
 .movie-card img {
-  height: 5rem;
+  height: 4rem;
 }
 
 .movie-card .meta-data {
@@ -155,6 +193,11 @@ header.header,
 }
 
 .movie-card .meta-data .title {
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 800;
+}
+
+.movie-card .meta-data .year,
+.movie-card .meta-data .type {
+  font-size: 0.8rem;
 }
