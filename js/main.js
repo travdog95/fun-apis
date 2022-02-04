@@ -5,9 +5,9 @@ const message = document.querySelector("[data-message]");
 const cardTemplate = document.querySelector("[data-movie-card-template]");
 const cardsContainer = document.querySelector("[data-movie-cards-container");
 
-const movieDetailsContainer = document.querySelector("[data-movie-details-container");
+const movieDetailsCard = document.querySelector("[data-movie-details-card");
 const modalContainer = document.querySelector("[data-modal-container]");
-const modalCloseButton = movieDetailsContainer.querySelector("[data-modal-close-button]");
+const modalCloseButton = movieDetailsCard.querySelector("[data-modal-close-button]");
 
 const paginationContainer = document.querySelector("[data-pagination-container]");
 const firstRecordSpan = document.querySelector("[data-first-record]");
@@ -123,22 +123,43 @@ const showMovieDetails = async (imdbID) => {
     const data = await response.json();
     console.log(data);
 
-    const poster = movieDetailsContainer.querySelector("[data-poster]");
-    const title = movieDetailsContainer.querySelector("[data-title]");
-    const year = movieDetailsContainer.querySelector("[data-year]");
-    const rating = movieDetailsContainer.querySelector("[data-rating]");
-    const runtime = movieDetailsContainer.querySelector("[data-runtime]");
-    const plot = movieDetailsContainer.querySelector("[data-plot]");
-    const imdbRating = movieDetailsContainer.querySelector("[data-imdb-rating]");
+    const poster = movieDetailsCard.querySelector("[data-poster]");
+    const title = movieDetailsCard.querySelector("[data-title]");
+    const year = movieDetailsCard.querySelector("[data-year]");
+    const rated = movieDetailsCard.querySelector("[data-rated]");
+    const runtime = movieDetailsCard.querySelector("[data-runtime]");
+    const plot = movieDetailsCard.querySelector("[data-plot]");
+    const imdbRating = movieDetailsCard.querySelector("[data-imdb-rating]");
+    const genres = movieDetailsCard.querySelector("[data-genres]");
+    const actors = movieDetailsCard.querySelector("[data-actors]");
 
     poster.src = data.Poster;
     title.textContent = data.Title;
-    year.textContent = data.Year;
-    rating.textContent = data.Rating;
-    runtime.textContent = data.Runtime;
+    year.textContent = data.Year === "N/A" ? "" : data.Year;
+    rated.textContent = data.Rated === "N/A" ? "" : data.Rated;
+    runtime.textContent = data.Runtime === "N/A" ? "" : data.Runtime;
     plot.textContent = data.Plot;
-    year.textContent = data.Year;
-    imdbRating.textContent = imdbRating.Year;
+    imdbRating.textContent = data.imdbRating === "N/A" ? "" : `${data.imdbRating}/10`;
+
+    const genresArray = data.Genre.split(",");
+    let genresHtml = "";
+    if (genresArray.length > 0) {
+      genresArray.forEach((genre) => {
+        genresHtml += `<div class="genre">${genre}</div>`;
+      });
+
+      genres.innerHTML = genresHtml;
+    }
+
+    const actorsArray = data.Actors.split(",");
+    let actorsHtml = "";
+    if (actorsArray.length > 0) {
+      actorsArray.forEach((actor) => {
+        actorsHtml += `<div class="actor">${actor}</div>`;
+      });
+
+      actors.innerHTML = actorsHtml;
+    }
   } else {
     // Handle errors
     console.log(response.status, response.statusText);
@@ -193,3 +214,5 @@ const clearPaginationData = () => {
   pagination = paginationDefaults;
   paginationContainer.classList.add("hidden");
 };
+
+// showMovieDetails("tt0076759");

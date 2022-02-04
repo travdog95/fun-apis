@@ -12,11 +12,11 @@
     <script src="/js/main.js" defer></script>
   </head>
   <body>
-    <header class="header"><h2>Movie Search</h2></header>
+    <header class="header"><h1>Movie Search</h1></header>
     <div class="container">
       <div class="search-container">
         <input type="search" class="search-input" data-search-input />
-        <button class="search btn btn-primary" data-search-button>Search</button>
+        <button class="btn btn-search" data-search-button>Search</button>
         <div class="message" data-message></div>
       </div>
       <div class="pagination-container hidden" data-pagination-container>
@@ -24,34 +24,36 @@
           Showing <span data-first-record></span> to <span data-last-record></span> of
           <span data-total-results></span> entries
         </div>
-        <div class="paging-buttons-container">
-          <button class="btn btn-paging" data-previous-page>Previous</button>
+        <div class="pagination-buttons-container">
+          <button class="btn btn-pagination" data-previous-page>Previous</button>
           <div class="pages-buttons-container"></div>
-          <button class="btn btn-paging" data-next-page>Next</button>
+          <button class="btn btn-pagination" data-next-page>Next</button>
         </div>
       </div>
       <div class="movie-cards-container" data-movie-cards-container></div>
     </div>
     <div class="modal-container hidden" data-modal-container>
-      <div class="move-details-container" data-movie-details-container>
-        <div class="movie-details-card">
-          <div class="header">
-            <div>
-              <div class="title" data-title></div>
-              <div class="meta-data-header-container">
-                <div class="year" data-year></div>
-                <div class="rating" data-rating></div>
-                <div class="runtime" data-runtime></div>
-                <div class="imdb-rating" data-imdb-rating></div>
-              </div>
-            </div>
+      <div class="movie-details-card" data-movie-details-card>
+        <div class="header">
+          <div class="title-container">
+            <div class="title" data-title></div>
             <div class="close" data-modal-close-button>X</div>
           </div>
-          <div class="main">
-            <img src="" alt="Poster" data-poster />
-            <div>
-              <div class="plot" data-plot></div>
+          <div class="meta-data-container">
+            <div class="primary-meta-data-container">
+              <div class="year" data-year></div>
+              <div class="rated" data-rated></div>
+              <div class="runtime" data-runtime></div>
+              <div class="imdb-rating" data-imdb-rating></div>
             </div>
+            <div class="actors-container" data-actors></div>
+          </div>
+        </div>
+        <div class="main">
+          <img src="" alt="Poster" data-poster />
+          <div>
+            <div class="plot" data-plot></div>
+            <div class="genres" data-genres></div>
           </div>
         </div>
       </div>

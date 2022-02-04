@@ -34,11 +34,43 @@ header.header,
   }
 }
 
-.paging-buttons-container {
+.pagination-buttons-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+
+.btn {
+  border: 1px solid $accent-color;
+  padding: 0.5rem;
+  background: white;
+  color: $accent-color;
+
+  &-search {
+    font-size: 1.3rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+    background: $accent-color;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.search-input {
+  padding: 0.5rem;
+  font-size: 1.3rem;
+  border: 1px solid $light-gray;
+}
+
+.search-input:focus {
+  border: 1px solid $medium-gray;
+  outline: none;
 }
 
 .movie-cards-container {
