@@ -15,6 +15,7 @@ const lastRecordSpan = document.querySelector("[data-last-record]");
 const totalResultsSpan = document.querySelector("[data-total-results]");
 const previousPageButton = document.querySelector("[data-previous-page]");
 const nextPageButton = document.querySelector("[data-next-page]");
+const pageButtonsContainer = document.querySelector("[data-page-buttons-container]");
 
 let movies = [];
 const paginationDefaults = {
@@ -28,6 +29,7 @@ const paginationDefaults = {
 };
 
 let pagination = {};
+let searchString = "";
 
 searchButton.disabled = true;
 searchInput.focus();
@@ -36,8 +38,8 @@ searchInput.focus();
 searchButton.addEventListener("click", (event) => {
   if (searchInput.value !== "") {
     clearPaginationData();
-
-    searchMovies(searchInput.value.toLowerCase());
+    searchString = searchInput.value;
+    searchMovies(searchString);
   }
 });
 
@@ -52,7 +54,8 @@ searchInput.addEventListener("input", (event) => {
 searchInput.addEventListener("keypress", (event) => {
   if (event.key === "Enter" && searchButton.disabled === false) {
     clearPaginationData();
-    searchMovies(event.target.value.toLowerCase());
+    searchString = event.target.value;
+    searchMovies(searchString);
   }
 });
 
@@ -61,11 +64,11 @@ modalCloseButton.addEventListener("click", (e) => {
 });
 
 previousPageButton.addEventListener("click", (e) => {
-  searchMovies(searchInput.value.toLowerCase(), pagination.previousPage);
+  searchMovies(searchString, pagination.previousPage);
 });
 
 nextPageButton.addEventListener("click", (e) => {
-  searchMovies(searchInput.value.toLowerCase(), pagination.nextPage);
+  searchMovies(searchString, pagination.nextPage);
 });
 
 //Functions
@@ -85,8 +88,9 @@ const searchMovies = async (searchText, pageNumber = 1) => {
     console.log(data);
 
     if (data.Response === "True") {
-      pagination = calcPaginationData(data, pageNumber);
-      updatePaginationData();
+      pagination = updatePaginationData(data, pageNumber);
+      console.log(pagination);
+      updatePaginationUI();
       paginationContainer.classList.remove("hidden");
 
       movies = data.Search.map((movie) => {
@@ -169,10 +173,11 @@ const showMovieDetails = async (imdbID) => {
   modalContainer.classList.remove("hidden");
 };
 
-const calcPaginationData = (data, currentPage) => {
+const updatePaginationData = (data, currentPage) => {
   const numPages = Math.ceil(data.totalResults / paginationDefaults.resultsPerPage);
+  currentPage = parseInt(currentPage);
   return {
-    totalResults: data.totalResults,
+    totalResults: parseInt(data.totalResults),
     numPages,
     currentPage: currentPage,
     previousPage: currentPage === 1 ? null : currentPage - 1,
@@ -182,9 +187,11 @@ const calcPaginationData = (data, currentPage) => {
   };
 };
 
-const updatePaginationData = () => {
+const updatePaginationUI = () => {
   let firstRecord = 0;
   let lastRecord = 0;
+  let firstPage = 0;
+  let pages = [];
 
   if (pagination.currentPage > 0) {
     firstRecord =
@@ -207,7 +214,24 @@ const updatePaginationData = () => {
       ? maxNumPageButtons
       : pagination.numPages;
 
-  console.log("numPageButtons", numPageButtons);
+  firstPage =
+    pagination.currentPage <= 3 ? 1 : pagination.currentPage - Math.floor(maxNumPageButtons / 2);
+
+  let html = "";
+  for (let i = 0; i < numPageButtons; i++) {
+    const page = firstPage + i;
+    const activeButtonClass = page === pagination.currentPage ? "btn-active" : "";
+    html += `<button class="btn btn-pagination ${activeButtonClass}" data-page="${page}">${page}</button>`;
+  }
+
+  pageButtonsContainer.innerHTML = html;
+
+  document.querySelectorAll("[data-page]").forEach((pageButton) => {
+    pageButton.addEventListener("click", (e) => {
+      const page = e.target.dataset.page;
+      searchMovies(searchString, page);
+    });
+  });
 };
 
 const clearPaginationData = () => {
