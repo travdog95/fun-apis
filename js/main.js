@@ -77,7 +77,7 @@ const searchMovies = async (searchText, pageNumber = 1) => {
   message.textContent = "";
 
   const response = await fetch(
-    `http://www.omdbapi.com/?s=${searchText}&type=movie&page=${pageNumber}&apikey=${OMDbApiKey}`
+    `https://www.omdbapi.com/?s=${searchText}&type=movie&page=${pageNumber}&apikey=${OMDbApiKey}`
   );
 
   //Clear exiting results
@@ -121,7 +121,7 @@ const searchMovies = async (searchText, pageNumber = 1) => {
 const showMovieDetails = async (imdbID) => {
   //Fetch movie details and load into HTML
   const response = await fetch(
-    `http://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${OMDbApiKey}`
+    `https://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${OMDbApiKey}`
   );
   if (response.status >= 200 && response.status <= 299) {
     const data = await response.json();
