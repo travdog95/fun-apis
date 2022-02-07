@@ -4,6 +4,7 @@ const searchButton = document.querySelector("[data-search-button]");
 const message = document.querySelector("[data-message]");
 const cardTemplate = document.querySelector("[data-movie-card-template]");
 const cardsContainer = document.querySelector("[data-movie-cards-container");
+const primaryMetaDataContainer = document.querySelector("[data-primary-meta-data-container]");
 
 const movieDetailsCard = document.querySelector("[data-movie-details-card");
 const modalContainer = document.querySelector("[data-modal-container]");
@@ -17,7 +18,6 @@ const previousPageButton = document.querySelector("[data-previous-page]");
 const nextPageButton = document.querySelector("[data-next-page]");
 const pageButtonsContainer = document.querySelector("[data-page-buttons-container]");
 
-let movies = [];
 const paginationDefaults = {
   currentPage: 0,
   previousPage: null,
@@ -30,6 +30,7 @@ const paginationDefaults = {
 
 let pagination = {};
 let searchString = "";
+const debug = true;
 
 searchButton.disabled = true;
 searchInput.focus();
@@ -85,22 +86,26 @@ const searchMovies = async (searchText, pageNumber = 1) => {
 
   if (response.status >= 200 && response.status <= 299) {
     const data = await response.json();
-    console.log(data);
+    if (debug) console.log(data);
 
     if (data.Response === "True") {
       pagination = updatePaginationData(data, pageNumber);
-      console.log(pagination);
+      if (debug) console.log(pagination);
       updatePaginationUI();
       paginationContainer.classList.remove("hidden");
 
-      movies = data.Search.map((movie) => {
+      data.Search.forEach((movie) => {
         const card = cardTemplate.content.cloneNode(true).children[0];
         const poster = card.querySelector("[data-poster]");
         const title = card.querySelector("[data-title]");
         const year = card.querySelector("[data-year]");
         const type = card.querySelector("[data-type]");
 
-        poster.src = movie.Poster;
+        poster.src =
+          movie.Poster === "N/A"
+            ? "https://via.placeholder.com/40x56/C2C2C2/757575/?text=N/A"
+            : movie.Poster;
+
         title.textContent = movie.Title;
         year.textContent = movie.Year;
         type.textContent = movie.Type;
@@ -108,7 +113,6 @@ const searchMovies = async (searchText, pageNumber = 1) => {
           showMovieDetails(movie.imdbID);
         });
         cardsContainer.append(card);
-        return { title: movie.Title.toLowerCase(), element: card };
       });
     } else {
       message.textContent = data.Error;
@@ -123,27 +127,40 @@ const showMovieDetails = async (imdbID) => {
   const response = await fetch(
     `https://www.omdbapi.com/?i=${imdbID}&plot=full&apikey=${OMDbApiKey}`
   );
+
   if (response.status >= 200 && response.status <= 299) {
     const data = await response.json();
-    console.log(data);
+    if (debug) console.log(data);
 
     const poster = movieDetailsCard.querySelector("[data-poster]");
     const title = movieDetailsCard.querySelector("[data-title]");
-    const year = movieDetailsCard.querySelector("[data-year]");
-    const rated = movieDetailsCard.querySelector("[data-rated]");
-    const runtime = movieDetailsCard.querySelector("[data-runtime]");
     const plot = movieDetailsCard.querySelector("[data-plot]");
-    const imdbRating = movieDetailsCard.querySelector("[data-imdb-rating]");
     const genres = movieDetailsCard.querySelector("[data-genres]");
     const actors = movieDetailsCard.querySelector("[data-actors]");
 
-    poster.src = data.Poster;
+    poster.src =
+      data.Poster === "N/A"
+        ? "https://via.placeholder.com/300x466/C2C2C2/757575/?text=N/A"
+        : data.Poster;
+
     title.textContent = data.Title;
-    year.textContent = data.Year === "N/A" ? "" : data.Year;
-    rated.textContent = data.Rated === "N/A" ? "" : data.Rated;
-    runtime.textContent = data.Runtime === "N/A" ? "" : data.Runtime;
     plot.textContent = data.Plot;
-    imdbRating.textContent = data.imdbRating === "N/A" ? "" : `${data.imdbRating}/10`;
+
+    const primaryMetaData = [];
+
+    if (data.Year !== "N/A") primaryMetaData.push(data.Year);
+    if (data.Rated !== "N/A") primaryMetaData.push(data.Rated);
+    if (data.Runtime !== "N/A") primaryMetaData.push(data.Runtime);
+    if (data.imdbRating !== "N/A") primaryMetaData.push(`${data.imdbRating}/10`);
+
+    let metaDataHtml = "";
+    if (primaryMetaData.length > 0) {
+      primaryMetaData.forEach((metaData) => {
+        metaDataHtml += `<div>${metaData}</div>`;
+      });
+
+      primaryMetaDataContainer.innerHTML = metaDataHtml;
+    }
 
     const genresArray = data.Genre.split(",");
     let genresHtml = "";
@@ -191,7 +208,6 @@ const updatePaginationUI = () => {
   let firstRecord = 0;
   let lastRecord = 0;
   let firstPage = 0;
-  let pages = [];
 
   if (pagination.currentPage > 0) {
     firstRecord =
