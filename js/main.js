@@ -30,7 +30,7 @@ const paginationDefaults = {
 
 let pagination = {};
 let searchString = "";
-const debug = true;
+const debug = false;
 
 searchButton.disabled = true;
 searchInput.focus();
